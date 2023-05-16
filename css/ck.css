@@ -1,0 +1,51 @@
+[class*='col-']{
+    padding-left: 0;
+    padding-right: 0;
+}
+#li1 li{
+    width: auto;
+    float: left;
+    list-style: none;
+    padding: 5px;
+    color: cadetblue;
+}
+img{
+    padding: 15px;
+}
+#header {
+    border-bottom: 1px solid darkgray;
+}
+#body{
+    border: 1px solid black;
+}
+#sider-bar
+{   
+    background:grey;
+    border: 1px solid gray;
+    height: 100%;
+}
+.table1{
+    width: auto;
+    margin: 10px;
+}
+table{
+    width: 100%;
+
+}
+#table{
+    border: 1px solid gray;
+}
+table tr:nth-child(even)
+{
+    background-color: gray;
+}
+table tr:nth-child(odd){
+    background-color:#fff;
+}
+label {
+    margin: 5px;
+}
+#btn-save {
+    border: 1px solid;
+    color: darkcyan;
+}

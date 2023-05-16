@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cuối kì</title>
+    <link rel="stylesheet" href="..//css/bootstrap.min.css">
+    <link rel="stylesheet" href="..//css/ck.css">
+    <script src="..//js/jquery-3.6.4.min.js"></script>
+    <script src="..//js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var i=1;
+            $("#kg").click(function(){
+                $("#mymodal").modal();
+            });
+            //kiem tra ser-->
+            var txtsr = $("#sr");
+            var tbtsr = $("#tbsr");
+            function kiemtrasr ()
+            {
+                var sr = (/^[A-Za-z0-9-_@!#$%^&*]+$/);
+    if(txtsr.val()==""){
+        tbtsr.html("so serial in tren kien hang neu co");
+        return false;
+    }   
+    else 
+    if(!sr.test(txtsr.val())){
+        tbtsr.html("sr k hop le");
+        return false;
+    }
+//--kiem tra do dai
+    else 
+    if(txtsr.val().length <6) {
+        tbtsr.html("nhap lai");
+        return false;
+    }
+    else{
+        tbtsr.html("*");
+        return true;
+    }           
+}
+            txtsr.blur(kiemtrasr);
+        var mt =$("#mt");
+        var tbmt =$("#tbmt");
+        function motakienhang (){
+            if(mt.val()==""){
+                tbmt.html("bat buoc");
+                return false;
+            }
+            else{
+                tbmt.html("*");
+                return true;
+            }
+        }
+        mt.blur(motakienhang);
+
+        var txttl= $("#tl");
+        var tbtl =$("#tbtl");
+        function kiemtratl(){
+            var tl = txttl.val();
+            if (tl ==""){
+                tbtl.html("bat buoc");
+                return false;
+            }
+            if (isNaN(tl)){
+                tbtl.html("phai la so");
+                return false;
+            }
+            if(eval(tl) <= 0){
+                tbtl.html("tl > 0");
+                return false;
+            }
+                    tbtl.html("*");
+                    return true;
+        }
+        function phivanchuye(){
+            var gia;
+            var trong_luong = parseFloat(txttl.val());
+            if (trong_luong <=20){
+                gia = 35000;
+            }
+            else
+            if (trong_luong <= 50){
+                gia = 30000;
+            }else{
+                gia= 15000;
+            }
+            var tong = trong_luong * gia;
+                $("#tien").val(tong);
+            }
+        txttl.blur(function(){
+            kiemtratl();
+            phivanchuye();
+        });
+        $("input[name='tong']").change(function(){
+            kiemtratl();
+            phivanchuye();
+        })
+        
+        $("#btn-save").click(function(){
+            var so = txtsr.val();
+            var kh = mt.val();
+            var anh = $("#anh").val();
+            var luong = txttl.val();
+            var phi = $("#tien").val();
+            var them = "<tr> <td>" + (i++) + "</td> <td>" + so + "</td> <td>" + kh +"</td> <td>" +
+                anh +"</td> <td>" + luong + "</td> <td>" + phi + "</td> </tr>";
+            $("table").append(them);
+            $("#mymodal").modal("hide");
+            return true;
+        });
+    });
+    
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row" id="header">
+            <div class="col-3 bg-warning" >
+                <img src="../img/logo7.png" alt="" width="100%" height="100px">
+            </div>
+            <div class="col-9 bg-warning">
+                <div class="nav-bar navbar-expand " id="li1" >
+                    <ul>
+                        <li class="nav-item"><a href="#" class="nav-link"></a>Trang chu</li>
+                        <li class="nav-item"><a href="#" class="nav-link"></a>Gioi thieu</li>
+                        <li class="nav-item"><a href="#" class="nav-link"></a>Dich vu</li>
+                        <li class="nav-item"><a href="#" class="nav-link" id="kg"></a>Ki gui hang hoa</li>
+                        <li class="nav-item"><a href="#" class="nav-link"></a>Lien he</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="body">
+            <div class="col-9 col-sm-9">
+                <p>form</p>
+            </div>
+            <div class="col-3 col-sm-3" id="sider-bar">
+                <h4>Qui dinh thanh toan</h4>
+                <ul>
+                    <li><p>Khach coc tu 70% - 100% so tien cua don hang</p></li>
+                    <li><p>Hang ve sau 24-48 tieng ke tu khi kho Trung Quoc ki nhan</p></li>
+                    <li><p>Shop se thanh ly don hang neu sau 1 tuan khach hang khong thanh toan tien nhan hang</p></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="row" id="table">
+            <div class="col-12 col-md-12" >
+                <div class="table1">
+                    <h5>Danh sach kien hang hoa gui</h5>
+                    <div class="table table-bordered table-light" >
+                        <table>
+                            <tr>
+                                <th>STT</th>
+                                <th>SERAIL</th>
+                                <th>MO TA KIEN HANG</th>
+                                <th>HINH ANH</th>
+                                <th>TRONG LUONG (KG)</th>
+                                <th>PHI VAN CHUYEN (VND)</th>
+                            </tr>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <div class="row border">
+        <div class="modal fade" id="mymodal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Thong tin kien hang hoa</h2>
+                        <button class="close" type="button" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form >
+                            <div class="row">
+                                <div class="col-3">
+                                    <label for="">So serial:</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" id="sr">
+                                    <span class="text-danger" id="tbsr"> so serial in tren kien hang neu co</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <label for="">Mo ta kien hang:</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" id="mt">
+                                    <span class="text-danger" id="tbmt">*</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <label for="">Hinh anh:</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="file" class="form-control" id="anh" accept=".jpg , .png ,.jpeg">
+                                </div>
+                            </div><br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <label for="">Trong luong:</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" id="tl">
+                                    <span  id="tbtl" class="text-danger">*</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <label for="">Phi van chuyen:</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" id="tien" name="tong" disabled>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <button type="button" id="btn-save" class="btn-block btn btn-light">Xac nhan</button>
+                                </div>
+    
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+       </div>
+    </div>
+</body>
+</html>
