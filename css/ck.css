@@ -15,14 +15,12 @@ img{
 #header {
     border-bottom: 1px solid darkgray;
 }
-#body{
-    border: 1px solid black;
-}
 #sider-bar
 {   
     background:grey;
     border: 1px solid gray;
     height: 100%;
+    border-left: 1px solid goldenrod;
 }
 .table1{
     width: auto;
@@ -48,4 +46,15 @@ label {
 #btn-save {
     border: 1px solid;
     color: darkcyan;
+}
+#footer{
+    height: 50px;
+    border-bottom: 1px solid slategrey
+}
+.container{
+    border: 1px solid slategrey;
+}
+#footer h4{
+    line-height: 50px;
+    text-align: center;
 }
